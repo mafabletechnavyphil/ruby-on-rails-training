@@ -45,6 +45,27 @@ def list_weights(weights)
   p "Weights: #{weights}"
 end
 
+def convert_weight_to_lbs(weights)
+  if weights.empty?
+    p "No weights recorded"
+    return
+  end
+
+  weights_lbs = weights.map { |weight| weight * 2.205 }
+
+  weights_lbs
+end
+
+def get_exceeding_weights(weights)
+  if weights.empty?
+    p "No weights recorded"
+    return
+  end
+
+  max_weight = 100
+  weights.select { |weight| weight >= max_weight  }
+end
+
 weights = []
 
 p "Welcome to Weight Tracker"
@@ -52,7 +73,9 @@ loop do
   p "1. Insert Weight"
   p "2. Calculate Average"
   p "3. List Weight"
-  p "4. Exit"
+  p "4. Convert Weights to LBS"
+  p "5. List Exceeding Weight"
+  p "0. Exit"
   print "> "
   choice = gets.chomp.to_i
 
@@ -68,6 +91,11 @@ loop do
     when 3
       list_weights(weights)
     when 4
+      weights_lbs = convert_weight_to_lbs(weights)
+      p "Weight in LBS: #{weights_lbs}"
+    when 5
+      p get_exceeding_weights(weights)
+    when 0
       break
     else "Invalid Input"
   end
