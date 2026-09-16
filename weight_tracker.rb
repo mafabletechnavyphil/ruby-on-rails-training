@@ -31,11 +31,7 @@ def get_average(weights)
     return
   end
 
-  total = 0
-
-  for weight in weights
-    total += weight
-  end
+  total = weights.reduce { |sum, number| sum + number }
 
   total / count.to_f
 end
